@@ -1,90 +1,127 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+// screens/Onboarding.js
+import React, { useRef, useState } from 'react';
+import {
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
+import OnboardingItem from '../../components/Onboarding/OnboardingItem';
+import Paginator from '../../components/Onboarding/Paginator';
+import { Navigation } from 'lucide-react-native';
 
-const OnboardingScreen = ({ navigation }) => {
+const { width } = Dimensions.get('window');
+
+const slides = [
+  {
+    id: '1',
+    title: 'Choose Products',
+    description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.',
+    image: require('../../assets/images/fashionshop1.png'),
+  },
+  {
+    id: '2',
+    title: 'Make Payment',
+    description: 'Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt.',
+    image: require('../../assets/images/Salesconsulting2.png'),
+  },
+  {
+    id: '3',
+    title: 'Get Your Order',
+    description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.',
+    image: require('../../assets/images/Shoppingbag3.png'),
+  },
+];
+
+const Onboarding = ({ navigation }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const slidesRef = useRef(null);
+
+  const viewableItemsChanged = useRef(({ viewableItems }) => {
+    setCurrentIndex(viewableItems[0].index);
+  }).current;
+
+  const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+  const scrollTo = () => {
+    if (currentIndex < slides.length - 1) {
+      slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
+    } else {
+      console.log('Get Started pressed!');
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/paymentlogo.png')}
-        style={styles.image}
-        resizeMode="contain"
+      <TouchableOpacity style={styles.skip} onPress={() => console.log('Skipped')}>
+        <Text style={styles.skipText}>Skip</Text>
+      </TouchableOpacity>
+
+      <FlatList
+        data={slides}
+        renderItem={({ item }) => <OnboardingItem item={item} />}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        bounces={false}
+        keyExtractor={(item) => item.id}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], {
+          useNativeDriver: false,
+        })}
+        onViewableItemsChanged={viewableItemsChanged}
+        viewabilityConfig={viewConfig}
+        scrollEventThrottle={32}
+        ref={slidesRef}
       />
-      <Text style={styles.title}>Make Payment</Text>
-      <Text style={styles.description}>
-        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-        Velit officia consequat duis enim velit mollit.
-      </Text>
-      <View style={styles.pagination}>
-        <View style={[styles.dot, styles.activeDot]} />
-        <View style={styles.dot} />
-        <View style={styles.dot} />
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity>
-          <Text style={styles.prevText}>Prev</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('NextScreen')}>
-          <Text style={styles.nextText}>Next</Text>
+
+      <View style={styles.footer}>
+        <Paginator data={slides} scrollX={scrollX} />
+        <TouchableOpacity
+          onPress={() => navigation.navigate('SignInScreen')}//here the error
+          style={styles.nextBtn}>
+          <Text style={styles.nextText}>
+            {currentIndex === slides.length - 1 ? 'Get Started' : 'Next'}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 
+export default Onboarding;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  skip: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    zIndex: 1,
+  },
+  skipText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  footer: {
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: wp('5%'),
+    marginBottom: 40,
   },
-  image: {
-    width: wp('80%'),
-    height: hp('30%'),
-  },
-  title: {
-    fontSize: wp('6%'),
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: hp('2%'),
-  },
-  description: {
-    fontSize: wp('4%'),
-    textAlign: 'center',
-    color: 'gray',
-    marginTop: hp('1%'),
-  },
-  pagination: {
-    flexDirection: 'row',
-    marginTop: hp('3%'),
-  },
-  dot: {
-    width: wp('2%'),
-    height: wp('2%'),
-    borderRadius: wp('1%'),
-    backgroundColor: '#ccc',
-    marginHorizontal: wp('1%'),
-  },
-  activeDot: {
-    backgroundColor: 'black',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: hp('4%'),
-  },
-  prevText: {
-    fontSize: wp('4%'),
-    color: 'gray',
+  nextBtn: {
+    marginTop: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    backgroundColor: '#ff3d5a',
+    borderRadius: 25,
   },
   nextText: {
-    fontSize: wp('4%'),
-    color: 'red',
-    fontWeight: 'bold',
+    color: '#fff',
+    fontSize: 16,
   },
 });
-
-export default OnboardingScreen;

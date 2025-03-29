@@ -1,42 +1,50 @@
-import React, { useEffect } from "react";
-import { View, Image, StyleSheet, Dimensions, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from 'react';
+import { View, Image, Text, StyleSheet, Dimensions } from 'react-native';
 
-const SplashScreen = () => {
-    const navigation = useNavigation();
+const { width } = Dimensions.get('window');
 
+const SplashScreen = ({ navigation }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
-            navigation.replace("OnboardingScreen");
+            navigation.replace('Onboarding');
         }, 3000);
+
         return () => clearTimeout(timer);
     }, [navigation]);
 
     return (
         <View style={styles.container}>
-            <Image source={require("../../assets/images/logo.png")} style={styles.logo} resizeMode="contain" />
-            <Text>Stylish</Text>
+            <View style={styles.logoBox}>
+                <Image
+                    source={require('../../assets/images/Group34010.png')}
+                    style={styles.logo}
+                    resizeMode="contain"
+                />
+                <Text style={styles.text}>Stylish</Text>
+            </View>
         </View>
     );
 };
 
-const { width, height } = Dimensions.get("window");
+export default SplashScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#fff",
+        flex: 1, backgroundColor: '#fff',
+        justifyContent: 'center', alignItems: 'center'
+    },
+    logoBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     logo: {
-        width: 50,
-        height: 50,
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1,
-
+        width: width * 0.2,
+        height: width * 0.2,
+        marginRight: 10,
     },
+    text: {
+        fontSize: width * 0.08,
+        fontWeight: 'bold',
+        color: '#d32f2f',
+    }
 });
-
-export default SplashScreen;
