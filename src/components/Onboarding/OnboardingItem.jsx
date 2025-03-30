@@ -1,14 +1,18 @@
 // components/OnboardingItem.js
 import React from 'react';
-import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, StatusBar } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
 const OnboardingItem = ({ item }) => {
     return (
         <View style={[styles.container, { width }]}>
-            <Image source={item.image} style={styles.image} resizeMode="contain" />
-            <View style={{ alignItems: 'center' }}>
+            <StatusBar barStyle="dark-content" />
+            <Text style={styles.splashHeader}>Splash screen</Text>
+            <View style={styles.imageContainer}>
+                <Image source={item.image} style={styles.image} resizeMode="contain" />
+            </View>
+            <View style={styles.textContainer}>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.description}>{item.description}</Text>
             </View>
@@ -20,27 +24,44 @@ export default OnboardingItem;
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingHorizontal: 20,
+    },
+    splashHeader: {
+        fontSize: 14,
+        color: '#aaa',
+        textAlign: 'center',
+        marginTop: 20,
+        marginBottom: 10,
+    },
+    imageContainer: {
+        flex: 1,
         justifyContent: 'center',
-        padding: 20,
+        alignItems: 'center',
+        paddingTop: height * 0.05,
     },
     image: {
-        flex: 0.6,
-        justifyContent: 'center',
-        width: width * 0.8,
-        height: height * 0.4,
+        width: width * 0.7,
+        height: width * 0.7,
+    },
+    textContainer: {
+        flex: 0.4,
+        alignItems: 'center',
+        paddingHorizontal: 10,
     },
     title: {
-        fontSize: width * 0.06,
+        fontSize: 24,
         fontWeight: 'bold',
         color: '#333',
         textAlign: 'center',
+        marginBottom: 10,
     },
     description: {
-        fontSize: width * 0.04,
+        fontSize: 16,
         color: '#666',
         textAlign: 'center',
-        paddingTop: 10,
+        lineHeight: 22,
         paddingHorizontal: 20,
     },
 });

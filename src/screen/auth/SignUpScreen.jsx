@@ -1,4 +1,3 @@
-// screens/SignUpScreen.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { COLORS } from '../../styles/colors';

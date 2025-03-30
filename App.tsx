@@ -7,8 +7,9 @@ import { NavigationContainer } from '@react-navigation/native';
 // import ProductDetailScreen from './src/screen/App/ProductDetailScreen';
 // import ProfileScreen from './src/screen/App/ProfileScreen';
 // import CoverScreen from './src/components/CoverComponent';
-// import AppNav from './src/navigations/App';
-import HomeScreen from './src/screen/App/HomeScreen';
+import AppNav from './src/navigations/App';
+// import HomeScreen from './src/screen/App/HomeScreen';
+// import TrendingProductsScreen from './src/screen/App/TrendingProductsScreen';
 
 export default function App() {
   return (
@@ -21,8 +22,9 @@ export default function App() {
     {/* <PaymentSuccessScreen/> */}
     {/* <ProductDetailScreen /> */}
     {/* <ProfileScreen /> */}
-    {/* <AppNav /> */}
-    <HomeScreen />
+    <AppNav />
+    {/* <HomeScreen /> */}
+    {/* <TrendingProductsScreen /> */}
 
     </NavigationContainer>
   );

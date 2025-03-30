@@ -45,5 +45,3 @@ export const SIZES = {
     full: 9999,
   },
 };
-
-export default SIZES;

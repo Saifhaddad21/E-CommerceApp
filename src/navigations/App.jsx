@@ -1,16 +1,17 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SplashScreen from '../screen/App/SplashScreen';
-import CheckoutScreen from '../screen/App/CheckoutScreen';
-
+// import CheckoutScreen from '../screen/App/CheckoutScreen';
+import Onboarding from '../screen/App/OnboardingScreen';
+// import SignInScreen from '../screen/auth/SignInScreen';
+// import SignUpScreen from '../screen/auth/SignUpScreen';
+// import ForgotPasswordScreen from '../screen/auth/ForgotPasswordScreen';
+// import HomeScreen from '../screen/App/HomeScreen';
 // import PaymentSuccessScreen from '../screen/App/PaymentSuccessScreen';
 // import ProductDetailScreen from '../screen/App/ProductDetailScreen';
 // import ProfileScreen from '../screen/App/ProfileScreen';
-import Onboarding from '../screen/App/OnboardingScreen';
-import SignInScreen from '../screen/auth/SignInScreen';
-import SignUpScreen from '../screen/auth/SignUpScreen';
-import ForgotPasswordScreen from '../screen/auth/ForgotPasswordScreen';
+// import TrendingProductsScreen from '../screen/App/TrendingProductsScreen';
+import SplashScreen from '../screen/App/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,7 @@ const AppNav = () => {
                 component={Onboarding}
                 options={{ headerShown: false }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="SignInScreen"
                 component={SignInScreen}
                 options={{ headerShown: false }}
@@ -47,7 +48,11 @@ const AppNav = () => {
                 component={ForgotPasswordScreen}
                 options={{ headerShown: false }}
             />
-
+            <Stack.Screen
+                name="HomeScreen"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+            /> */}
             {/* <Stack.Screen
                 name="PaymentSuccessScreen"
                 component={PaymentSuccessScreen}
@@ -63,6 +68,12 @@ const AppNav = () => {
                 component={ProfileScreen}
                 options={{ headerShown: false }}
             /> */}
+            {/* <Stack.Screen
+                name="TrendingProductsScreen"
+                component={TrendingProductsScreen}
+                options={{ headerShown: false }}
+            /> */}
+
 
         </Stack.Navigator>
     );

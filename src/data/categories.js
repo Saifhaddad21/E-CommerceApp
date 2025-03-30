@@ -24,4 +24,19 @@ export const categories = [
     name: 'Womenswear',
     image: require('../assets/categories/womens.png'),
   },
+  {
+    id: 6,
+    name: 'Kids',
+    image: require('../assets/categories/kids.png'),
+  },
+  {
+    id: 7,
+    name: 'Home',
+    image: require('../assets/categories/mens.png'),
+  },
+  {
+    id: 8,
+    name: 'Womenswear',
+    image: require('../assets/categories/womens.png'),
+  },
 ];

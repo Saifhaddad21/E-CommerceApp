@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const PromotionBanner = ({ banner }) => {
     return (
@@ -25,11 +26,11 @@ const PromotionBanner = ({ banner }) => {
                 />
             </View>
 
-            <View style={styles.pagination}>
+            <TouchableOpacity style={styles.pagination}>
                 <View style={[styles.dot, styles.activeDot]} />
                 <View style={styles.dot} />
                 <View style={styles.dot} />
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };

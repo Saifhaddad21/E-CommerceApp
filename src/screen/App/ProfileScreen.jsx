@@ -12,13 +12,13 @@ import {
 
 const { width } = Dimensions.get('window');
 
-const featuredCategories = [
-    { title: 'Beauty', image: require('../../assets/icons/cosmetics.png') },
-    { title: 'Fashion', image: require('../../assets/icons/woman.png') },
-    { title: 'Kids', image: require('../../assets/icons/tshirt.png') },
-    { title: 'Mens', image: require('../../assets/icons/black.png') },
-    { title: 'Womens', image: require('../../assets/icons/woman-clothes.png') },
-];
+// const featuredCategories = [
+//     { title: 'Beauty', image: require('../../assets/icons/cosmetics.png') },
+//     { title: 'Fashion', image: require('../../assets/icons/woman.png') },
+//     { title: 'Kids', image: require('../../assets/icons/tshirt.png') },
+//     { title: 'Mens', image: require('../../assets/icons/black.png') },
+//     { title: 'Womens', image: require('../../assets/icons/woman-clothes.png') },
+// ];
 
 const products = [
     {

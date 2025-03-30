@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import OnboardingItem from '../../components/Onboarding/OnboardingItem';
 import Paginator from '../../components/Onboarding/Paginator';
-import { Navigation } from 'lucide-react-native';
+import { navigation } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -58,7 +58,7 @@ const Onboarding = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.skip} onPress={() => console.log('Skipped')}>
-        <Text style={styles.skipText}>Skip</Text>
+        <Text onPress={() => navigation.navigate('SignInScreen')} style={styles.skipText}>Skip</Text>
       </TouchableOpacity>
 
       <FlatList
@@ -81,9 +81,9 @@ const Onboarding = ({ navigation }) => {
       <View style={styles.footer}>
         <Paginator data={slides} scrollX={scrollX} />
         <TouchableOpacity
-          onPress={() => navigation.navigate('SignInScreen')}//here the error
+          onPress={() => navigation.navigate('SignInScreen')}
           style={styles.nextBtn}>
-          <Text style={styles.nextText}>
+          <Text style={styles.nextText} >
             {currentIndex === slides.length - 1 ? 'Get Started' : 'Next'}
           </Text>
         </TouchableOpacity>

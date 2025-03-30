@@ -49,5 +49,3 @@ export const COLORS = {
   bottomNavInactive: '#999999',
   shadow: 'rgba(0, 0, 0, 0.05)',
 };
-
-export default COLORS;
