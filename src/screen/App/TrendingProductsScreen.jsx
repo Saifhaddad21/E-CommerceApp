@@ -21,8 +21,7 @@ const TrendingProductsScreen = ({ navigation }) => {
     const [products] = useState(trendingProducts);
 
     const handleProductPress = (productId) => {
-        // Navigate to product details
-        console.log(`Product ${productId} pressed`);
+        navigation.navigate('ProductDetailsScreen');
     };
 
     const handleTabPress = (tabId) => {

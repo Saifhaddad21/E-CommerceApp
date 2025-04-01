@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, SafeAreaView, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import HeaderIcons from '../../components/BackStep'
 
@@ -15,7 +14,7 @@ const ProductDetailsScreen = ({ navigation }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     const handleBack = () => {
-        navigation.navigate('HomeScreen');
+        navigation.navigate('TrendingProductsScreen');
     }
     const handleStore = () => {
         navigation.navigate('TrendingProductsScreen');

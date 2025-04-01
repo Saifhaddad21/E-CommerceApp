@@ -5,27 +5,27 @@ import OnboardingScreen from '../screen/App/OnboardingScreen';
 import SignInScreen from '../screen/auth/SignInScreen';
 import SignUpScreen from '../screen/auth/SignUpScreen';
 import ForgotPasswordScreen from '../screen/auth/ForgotPasswordScreen';
-import HomeScreen from '../screen/App/HomeScreen';
-import TrendingProductsScreen from '../screen/App/TrendingProductsScreen';
 import TabApp from './tabs/TabApp';
 import ProductDetailsScreen from '../screen/App/ProductDetailsScreen';
 import CheckoutProfileScreen from '../screen/App/CheckoutProfileScreen';
+import DeliveryAddress from '../components/checkout/DeliveryAddress';
 
 const Stack = createNativeStackNavigator();
 
 const AppNav = () => {
     return (
-        <Stack.Navigator initialRouteName='CheckoutProfileScreen'>
+        <Stack.Navigator initialRouteName='SplashScreen'>
+            <Stack.Screen
+                name="DeliveryAddress"
+                component={DeliveryAddress}
+                options={{ headerShown: false }}
+            />
             <Stack.Screen
                 name="CheckoutProfileScreen"
                 component={CheckoutProfileScreen}
                 options={{ headerShown: false }}
             />
-            <Stack.Screen
-                name="ProductDetailsScreen"
-                component={ProductDetailsScreen}
-                options={{ headerShown: false }}
-            />
+
             <Stack.Screen
                 name="SplashScreen"
                 component={SplashScreen}

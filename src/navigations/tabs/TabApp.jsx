@@ -9,6 +9,8 @@ import SearchScreen from '../../screen/App/SearchScreen';
 import SettingScreen from '../../screen/App/SettingScreen';
 import TrendingProductsScreen from '../../screen/App/TrendingProductsScreen';
 import ProductDetailsScreen from '../../screen/App/ProductDetailsScreen';
+import WishlistScreen from '../../screen/App/WishlistScreen';
+import CartStack from './Stack/CartStack';
 
 const { width } = Dimensions.get('window');
 
@@ -37,7 +39,7 @@ export default function TabApp() {
             />
             <Tab.Screen
                 name="Wishlist"
-                component={TrendingProductsScreen}
+                component={WishlistScreen}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <FontAwesomeIcon icon={faHeart} size={width * 0.06} color={color} />
@@ -46,7 +48,7 @@ export default function TabApp() {
             />
             <Tab.Screen
                 name="Cart"
-                component={ProductDetailsScreen}
+                component={CartStack}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ focused }) => (

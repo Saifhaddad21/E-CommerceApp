@@ -1,45 +1,34 @@
-import React, { useState } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    TouchableOpacity,
-    Image,
-    Dimensions,
-} from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions, ScrollView, SafeAreaView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import CheckoutProfileScreen from '../../screen/App/CheckoutProfileScreen';
 
 const { width } = Dimensions.get('window');
 
-const CheckoutScreen = ({ navigation }) => {
-    const [cartItems] = useState([
+const DeliveryAddress = ({ navigation }) => {
+    const cartItems = [
         {
             id: 1,
-            image: require('../../assets/images/womens-casual.png'),
             title: "Women's Casual Wear",
+            image: require('../../assets/images/womancasual.png'),
             variations: ['Black', 'Red'],
             rating: 4.8,
             reviews: 245,
             price: 34.00,
-            originalPrice: 54.00,
-            quantity: 1,
+            originalPrice: 54.00
         },
         {
             id: 2,
-            image: require('../../assets/images/mens-jacket.png'),
             title: "Men's Jacket",
+            image: require('../../assets/images/menjacket.png'),
             variations: ['Green', 'Grey'],
             rating: 4.7,
             reviews: 153,
             price: 45.00,
-            originalPrice: 77.00,
-            quantity: 1,
+            originalPrice: 77.00
         }
-    ]);
+    ];
 
     const handleBack = () => {
         navigation.goBack();
@@ -54,6 +43,7 @@ const CheckoutScreen = ({ navigation }) => {
                     name={i <= rating ? 'star' : 'star-outline'}
                     size={12}
                     color="#FFD700"
+                    style={{ marginRight: 2 }}
                 />
             );
         }
@@ -62,67 +52,69 @@ const CheckoutScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar backgroundColor="#fff" barStyle="dark-content" />
-
             {/* Header */}
             <View style={styles.header}>
                 <TouchableOpacity onPress={handleBack}>
-                    <Icon name="chevron-back" size={24} color="#000" />
+
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Checkout</Text>
-                <View style={{ width: 24 }} />
+                <View style={styles.headerRight} />
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false}>
-                {/* Delivery Address */}
-                <View style={styles.addressContainer}>
+                {/* Delivery Address Section */}
+                <View style={styles.addressSection}>
                     <View style={styles.addressHeader}>
                         <View style={styles.addressTitleContainer}>
-                            <Icon name="location-outline" size={20} color="#000" />
-                            <Text style={styles.addressLabel}>Delivery Address</Text>
+                            <View style={styles.deliveryAddressLabel}>
+                                <Image
+                                    source={require('../../assets/icons/location.png')}
+                                />
+                                <Text style={styles.deliveryAddressText}>Delivery Address</Text>
+                            </View>
                         </View>
                         <TouchableOpacity>
                             <MaterialIcons name="add" size={24} color="#000" />
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.address}>26, St Paul's Rd, London N1 2LL, UK</Text>
-                    <Text style={styles.coordinates}>+44-7842392</Text>
+                    <Text style={styles.phone}>+44-7842392</Text>
                 </View>
 
-                {/* Shopping List */}
-                <View style={styles.shoppingListContainer}>
+                {/* Shopping List Section */}
+                <View style={styles.shoppingListSection}>
                     <Text style={styles.sectionTitle}>Shopping List</Text>
                     {cartItems.map((item, index) => (
-                        <View key={item.id} style={styles.cartItem}>
-                            <Image source={item.image} style={styles.productImage} />
-                            <View style={styles.productDetails}>
-                                <Text style={styles.productTitle}>{item.title}</Text>
-                                <View style={styles.variationsContainer}>
-                                    <Text style={styles.variationsLabel}>Variations : </Text>
-                                    {item.variations.map((variation, idx) => (
-                                        <Text key={idx} style={styles.variationText}>
-                                            {variation}{idx < item.variations.length - 1 ? ' / ' : ''}
-                                        </Text>
-                                    ))}
-                                </View>
-                                <View style={styles.ratingContainer}>
-                                    <Text style={styles.rating}>{item.rating}</Text>
-                                    <View style={styles.starsContainer}>
-                                        {renderStars(Math.floor(item.rating))}
+                        <View key={item.id}>
+                            <View style={styles.productCard}>
+                                <Image source={item.image} style={styles.productImage} />
+                                <View style={styles.productDetails}>
+                                    <Text style={styles.productTitle}>{item.title}</Text>
+                                    <View style={styles.variationsContainer}>
+                                        <Text style={styles.variationsLabel}>Variations : </Text>
+                                        {item.variations.map((variation, idx) => (
+                                            <Text key={idx} style={styles.variationText}>
+                                                {variation}{idx < item.variations.length - 1 ? ' / ' : ''}
+                                            </Text>
+                                        ))}
                                     </View>
-                                    <Text style={styles.reviews}>({item.reviews})</Text>
-                                </View>
-                                <View style={styles.priceContainer}>
-                                    <Text style={styles.price}>$ {item.price.toFixed(2)}</Text>
-                                    <Text style={styles.originalPrice}>$ {item.originalPrice.toFixed(2)}</Text>
+                                    <View style={styles.ratingContainer}>
+                                        <Text style={styles.rating}>{item.rating}</Text>
+                                        <View style={styles.starsContainer}>
+                                            {renderStars(Math.floor(item.rating))}
+                                        </View>
+                                        <Text style={styles.reviews}>({item.reviews})</Text>
+                                    </View>
+                                    <View style={styles.priceContainer}>
+                                        <Text style={styles.price}>$ {item.price.toFixed(2)}</Text>
+                                        <Text style={styles.originalPrice}>$ {item.originalPrice.toFixed(2)}</Text>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
-                    ))}
-                    {cartItems.map((item, index) => (
-                        <View key={`total-${item.id}`} style={styles.totalOrderContainer}>
-                            <Text style={styles.totalOrderLabel}>Total Order ({index + 1}) :</Text>
-                            <Text style={styles.totalOrderValue}>$ {item.price.toFixed(2)}</Text>
+                            <View style={styles.totalOrderContainer}>
+                                <Text style={styles.totalOrderLabel}>Total Order ({index + 1}) :</Text>
+                                <Text style={styles.totalOrderValue}>$ {item.price.toFixed(2)}</Text>
+                            </View>
                         </View>
                     ))}
                 </View>
@@ -134,7 +126,7 @@ const CheckoutScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5F5F5',
+        backgroundColor: '#fff',
     },
     header: {
         flexDirection: 'row',
@@ -142,19 +134,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 16,
         paddingVertical: 12,
-        backgroundColor: '#fff',
         borderBottomWidth: 1,
-        borderBottomColor: '#F0F0F0',
+        borderBottomColor: '#F5F5F5',
     },
     headerTitle: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '600',
         color: '#000',
     },
-    addressContainer: {
-        backgroundColor: '#fff',
+    headerRight: {
+        width: 24,
+    },
+    addressSection: {
         padding: 16,
-        marginTop: 8,
+        backgroundColor: '#fff',
     },
     addressHeader: {
         flexDirection: 'row',
@@ -166,29 +159,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    addressLabel: {
-        fontSize: 14,
-        fontWeight: '600',
-        color: '#000',
-        marginLeft: 8,
+    deliveryAddressLabel: {
         backgroundColor: '#FFE600',
+        borderRadius: 4,
+        marginLeft: 8,
         paddingHorizontal: 8,
         paddingVertical: 2,
-        borderRadius: 4,
+    },
+    deliveryAddressText: {
+        fontSize: 14,
+        fontWeight: '500',
+        color: '#000',
     },
     address: {
         fontSize: 14,
         color: '#000',
         marginBottom: 4,
     },
-    coordinates: {
+    phone: {
         fontSize: 12,
         color: '#666',
     },
-    shoppingListContainer: {
-        backgroundColor: '#fff',
+    shoppingListSection: {
         padding: 16,
-        marginTop: 8,
     },
     sectionTitle: {
         fontSize: 16,
@@ -196,12 +189,9 @@ const styles = StyleSheet.create({
         color: '#000',
         marginBottom: 16,
     },
-    cartItem: {
+    productCard: {
         flexDirection: 'row',
         marginBottom: 16,
-        paddingBottom: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#F0F0F0',
     },
     productImage: {
         width: width * 0.25,
@@ -268,7 +258,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 8,
+        paddingVertical: 12,
+        borderTopWidth: 1,
+        borderTopColor: '#F5F5F5',
+        marginBottom: 16,
     },
     totalOrderLabel: {
         fontSize: 14,
@@ -281,4 +274,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CheckoutScreen;
+export default DeliveryAddress; 

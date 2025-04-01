@@ -19,7 +19,7 @@ const { width } = Dimensions.get('window');
 
 const CheckoutProfileScreen = ({ navigation }) => {
     const handleBack = () => {
-        navigation.navigation('ProductDetailsScreen');
+        navigation.navigation(ProductDetailsScreen);
     };
 
 
