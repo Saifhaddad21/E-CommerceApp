@@ -8,12 +8,18 @@ import ForgotPasswordScreen from '../screen/auth/ForgotPasswordScreen';
 import HomeScreen from '../screen/App/HomeScreen';
 import TrendingProductsScreen from '../screen/App/TrendingProductsScreen';
 import TabApp from './tabs/TabApp';
+import ProductDetailsScreen from '../screen/App/ProductDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNav = () => {
     return (
-        <Stack.Navigator initialRouteName='OnboardingScreen'>
+        <Stack.Navigator initialRouteName='ProductDetailsScreen'>
+            <Stack.Screen
+                name="ProductDetailsScreen"
+                component={ProductDetailsScreen}
+                options={{ headerShown: false }}
+            />
             <Stack.Screen
                 name="SplashScreen"
                 component={SplashScreen}

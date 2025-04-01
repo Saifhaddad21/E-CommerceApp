@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView, Dimensions } from 'react-native';
 import { COLORS } from '../../styles/colors';
-import { SIZES } from '../../styles/sizes';
 
 const { width } = Dimensions.get('window');
 

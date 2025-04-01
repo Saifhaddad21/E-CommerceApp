@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Animated,
   TouchableOpacity,
-  Dimensions,
 } from 'react-native';
 import OnboardingItem from '../../components/Onboarding/OnboardingItem';
 import Paginator from '../../components/Onboarding/Paginator';

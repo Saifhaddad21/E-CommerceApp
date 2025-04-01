@@ -7,6 +7,7 @@ import InputField from '../../components/auth/InputField';
 import AuthButton from '../../components/auth/AuthButton';
 import TitleField from '../../components/auth/TitleField';
 import Layout from '../../components/auth/Layout';
+import BackStepIcon from '../../components/BackStep';
 
 const { width } = Dimensions.get('window');
 
@@ -18,23 +19,31 @@ const ForgotPasswordScreen = ({ navigation }) => {
         // Handle password reset logic
     };
 
+    const handleSignin = () => {
+        navigation.navigate('SignInScreen');
+    }
+
     return (
-        <Layout>
-            <TitleField title={"Forgot password?"} />
+        <>
+            <BackStepIcon onPress1={handleSignin} />
+            <Layout>
+                <TitleField title={"Forgot password?"} />
 
-            <InputField
-                type="email"
-                placeholder="Enter your email address"
-                value={email}
-                onChangeText={setEmail}
-            />
+                <InputField
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChangeText={setEmail}
+                />
 
-            <Text style={styles.noteText}>
-                <Text style={styles.asterisk}>*</Text> We will send you a message to set or reset your new password
-            </Text>
+                <Text style={styles.noteText}>
+                    <Text style={styles.asterisk}>*</Text> We will send you a message to set or reset your new password
+                </Text>
 
-            <AuthButton title="Submit" onPress={handleSubmit} />
-        </Layout>
+                <AuthButton title="Submit" onPress={handleSubmit} />
+            </Layout>
+        </>
+
     );
 };
 

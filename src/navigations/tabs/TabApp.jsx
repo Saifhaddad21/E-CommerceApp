@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faHome, faHeart, faCartShopping, faSearch, faGear } from '@fortawesome/free-solid-svg-icons';
 import { COLORS } from '../../styles/colors';
 import HomeScreen from '../../screen/App/HomeScreen';
-import WishlistScreen from '../../screen/App/WishlistScreen';
-import CartScreen from '../../screen/App/CartScreen';
 import SearchScreen from '../../screen/App/SearchScreen';
 import SettingScreen from '../../screen/App/SettingScreen';
 import TrendingProductsScreen from '../../screen/App/TrendingProductsScreen';
+import ProductDetailsScreen from '../../screen/App/ProductDetailsScreen';
 
 const { width } = Dimensions.get('window');
 
@@ -47,7 +46,7 @@ export default function TabApp() {
             />
             <Tab.Screen
                 name="Cart"
-                component={CartScreen}
+                component={ProductDetailsScreen}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ focused }) => (

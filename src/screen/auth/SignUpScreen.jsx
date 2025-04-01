@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
 import InputField from '../../components/auth/InputField';
-import PasswordField from '../../components/auth/PasswordField';
 import AuthButton from '../../components/auth/AuthButton';
 import SocialButtonsRow from '../../components/auth/SocialButtonsRow';
 import TitleField from '../../components/auth/TitleField';
