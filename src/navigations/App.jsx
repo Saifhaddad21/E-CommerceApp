@@ -9,12 +9,18 @@ import HomeScreen from '../screen/App/HomeScreen';
 import TrendingProductsScreen from '../screen/App/TrendingProductsScreen';
 import TabApp from './tabs/TabApp';
 import ProductDetailsScreen from '../screen/App/ProductDetailsScreen';
+import CheckoutProfileScreen from '../screen/App/CheckoutProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNav = () => {
     return (
-        <Stack.Navigator initialRouteName='ProductDetailsScreen'>
+        <Stack.Navigator initialRouteName='CheckoutProfileScreen'>
+            <Stack.Screen
+                name="CheckoutProfileScreen"
+                component={CheckoutProfileScreen}
+                options={{ headerShown: false }}
+            />
             <Stack.Screen
                 name="ProductDetailsScreen"
                 component={ProductDetailsScreen}

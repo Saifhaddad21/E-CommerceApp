@@ -11,11 +11,11 @@ export default function HeaderIcons({ onPress1, onPress2, showText, HeartIcon, S
                 <FontAwesomeIcon icon={faChevronLeft} size={24} color="black" />
             </TouchableOpacity>
 
-            {HeartIcon && (<TouchableOpacity onPress={onPress2}>
+            {StoreIcon && (<TouchableOpacity onPress={onPress2}>
                 <FontAwesomeIcon icon={faShoppingCart} size={24} color="black" />
             </TouchableOpacity>)}
 
-            {StoreIcon && (<TouchableOpacity>
+            {HeartIcon && (<TouchableOpacity>
                 <FontAwesomeIcon icon={faHeart} size={24} color="black" />
             </TouchableOpacity>)}
 

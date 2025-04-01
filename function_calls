@@ -1,0 +1,131 @@
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import { COLORS } from '../../styles/colors';
+import { SIZES } from '../../styles/sizes';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faSolidHeart } from '@fortawesome/free-solid-svg-icons';
+
+const { width } = Dimensions.get('window');
+
+const ProductImageCarousel = ({ images }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const flatListRef = useRef(null);
+
+    const toggleFavorite = () => {
+        setIsFavorite(!isFavorite);
+    };
+
+    const renderItem = ({ item }) => (
+        <View style= { styles.imageContainer } >
+        <Image
+                source={ item }
+    style = { styles.image }
+    resizeMode = "contain"
+        />
+        </View>
+    );
+
+const handleScroll = (event) => {
+    const scrollPosition = event.nativeEvent.contentOffset.x;
+    const index = Math.round(scrollPosition / width);
+    setActiveIndex(index);
+};
+
+return (
+    <View style= { styles.container } >
+    <FlatList
+                ref={ flatListRef }
+data = { images }
+renderItem = { renderItem }
+keyExtractor = {(_, index) => index.toString()}
+horizontal
+pagingEnabled
+showsHorizontalScrollIndicator = { false}
+onScroll = { handleScroll }
+snapToInterval = { width }
+decelerationRate = "fast"
+    />
+
+    <TouchableOpacity style={ styles.favoriteButton } onPress = { toggleFavorite } >
+        <FontAwesomeIcon 
+                    icon={ isFavorite ? faSolidHeart : faHeart }
+size = { width * 0.06}
+color = { isFavorite? COLORS.primary : COLORS.gray }
+    />
+    </TouchableOpacity>
+
+    < View style = { styles.pagination } >
+    {
+        images.map((_, index) => (
+            <View
+                        key= { index }
+                        style = {
+                [
+                    styles.dot,
+                    activeIndex === index && styles.activeDot
+                ]}
+            />
+                ))
+    }
+        </>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        width: '100%',
+        height: width * 0.8,
+        position: 'relative',
+    },
+    imageContainer: {
+        width: width,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f5f5f5',
+    },
+    image: {
+        width: '90%',
+        height: '90%',
+    },
+    pagination: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: width * 0.025,
+        width: '100%',
+    },
+    dot: {
+        width: width * 0.02,
+        height: width * 0.02,
+        borderRadius: width * 0.01,
+        backgroundColor: COLORS.gray,
+        marginHorizontal: width * 0.01,
+    },
+    activeDot: {
+        width: width * 0.04,
+        backgroundColor: COLORS.primary,
+    },
+    favoriteButton: {
+        position: 'absolute',
+        right: width * 0.04,
+        top: width * 0.04,
+        width: width * 0.1,
+        height: width * 0.1,
+        borderRadius: width * 0.05,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 3,
+    },
+});
+
+export default ProductImageCarousel;
