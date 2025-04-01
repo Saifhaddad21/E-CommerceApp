@@ -1,7 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
+
+const { width } = Dimensions.get('window');
 
 const AuthButton = ({ title, onPress }) => {
     return (
@@ -13,11 +15,15 @@ const AuthButton = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: COLORS.primary,
-        borderRadius: SIZES.borderRadius.md,
-        paddingVertical: SIZES.padding.md,
+        backgroundColor: COLORS.button.primary,
+        borderRadius: SIZES.borderRadius.sm,
+        fontSize: 20,
+        fontWeight: 600,
         alignItems: 'center',
-        marginVertical: SIZES.margin.md,
+        justifyContent: 'center',
+        height: 55,
+        width: width * 0.85,
+        alignSelf: 'center',
     },
     buttonText: {
         color: COLORS.text.white,

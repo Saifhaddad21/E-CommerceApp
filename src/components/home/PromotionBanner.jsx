@@ -1,55 +1,107 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, Dimensions, ImageBackground } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
-import { ScrollView } from 'react-native-gesture-handler';
+
+const { width } = Dimensions.get('window');
 
 const PromotionBanner = ({ banner }) => {
-    return (
-        <View style={styles.container}>
-            <View style={[styles.banner, { backgroundColor: banner.backgroundColor }]}>
+    const [activeIndex, setActiveIndex] = useState(0);
+    const flatListRef = useRef(null);
+
+    const renderItem = ({ item }) => (
+        <ImageBackground
+            source={item.image}
+            style={[styles.banner, { width: width - 30 }]}
+            imageStyle={styles.backgroundImage}
+        >
+            <View style={[styles.overlay, { backgroundColor: `${item.backgroundColor}95` }]}>
                 <View style={styles.content}>
-                    <Text style={styles.title}>{banner.title}</Text>
-                    <Text style={styles.subtitle}>{banner.subtitle}</Text>
-                    <Text style={styles.description}>{banner.description}</Text>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.subtitle}>{item.subtitle}</Text>
+                    <Text style={styles.description}>{item.description}</Text>
 
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Shop Now</Text>
                         <Text style={styles.arrowIcon}>→</Text>
                     </TouchableOpacity>
                 </View>
-
-                <Image
-                    source={banner.image}
-                    style={styles.bannerImage}
-                    resizeMode="contain"
-                />
             </View>
+        </ImageBackground>
+    );
 
-            <TouchableOpacity style={styles.pagination}>
-                <View style={[styles.dot, styles.activeDot]} />
-                <View style={styles.dot} />
-                <View style={styles.dot} />
-            </TouchableOpacity>
+    const handleScroll = (event) => {
+        const scrollPosition = event.nativeEvent.contentOffset.x;
+        const index = Math.round(scrollPosition / (width - 30));
+        setActiveIndex(index);
+    };
+
+    const scrollToIndex = (index) => {
+        flatListRef.current?.scrollToIndex({
+            index,
+            animated: true
+        });
+        setActiveIndex(index);
+    };
+
+    return (
+        <View style={styles.container}>
+            <FlatList
+                ref={flatListRef}
+                data={banner}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                onScroll={handleScroll}
+                snapToInterval={width - 30}
+                decelerationRate="fast"
+                contentContainerStyle={styles.flatListContent}
+            />
+
+            <View style={styles.pagination}>
+                {banner.map((_, index) => (
+                    <TouchableOpacity
+                        key={index}
+                        onPress={() => scrollToIndex(index)}
+                        style={styles.dotContainer}
+                    >
+                        <View style={[
+                            styles.dot,
+                            activeIndex === index && styles.activeDot
+                        ]} />
+                    </TouchableOpacity>
+                ))}
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 15,
         marginBottom: 15,
     },
+    flatListContent: {
+        paddingHorizontal: 15,
+    },
     banner: {
-        flexDirection: 'row',
         borderRadius: SIZES.radius,
         height: SIZES.bannerHeight,
         overflow: 'hidden',
+        marginRight: 15,
+    },
+    backgroundImage: {
+        resizeMode: 'cover',
+        borderRadius: SIZES.radius,
+    },
+    overlay: {
+        flex: 1,
         padding: 15,
+        justifyContent: 'center',
     },
     content: {
-        flex: 1,
-        justifyContent: 'center',
+        width: '70%', // Limit content width
     },
     title: {
         fontSize: SIZES.xlarge,
@@ -86,14 +138,13 @@ const styles = StyleSheet.create({
         color: COLORS.text.primary,
         fontSize: SIZES.small,
     },
-    bannerImage: {
-        width: '40%',
-        height: '100%',
-    },
     pagination: {
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 10,
+    },
+    dotContainer: {
+        padding: 5,
     },
     dot: {
         width: 6,

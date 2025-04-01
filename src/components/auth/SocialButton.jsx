@@ -20,7 +20,7 @@ const SocialButton = ({ provider, onPress }) => {
 
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Icon name={getProviderIcon()} size={24} color="#333" />
+            <Icon name={getProviderIcon()} size={24} color={getProviderIcon() == 'facebook' ? "#3D4DA6" : "#333"} />
         </TouchableOpacity>
     );
 };
@@ -31,10 +31,12 @@ const styles = StyleSheet.create({
         height: 50,
         borderRadius: 25,
         borderWidth: 1,
-        borderColor: COLORS.border,
+        borderColor: COLORS.button.primary,
+        backgroundColor: COLORS.button.bg,
         justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal: SIZES.margin.sm,
+        marginHorizontal: 5
+        // marginHorizontal: SIZES.margin.sm,
     },
 });
 

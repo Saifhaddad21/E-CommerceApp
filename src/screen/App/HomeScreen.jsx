@@ -15,7 +15,6 @@ import SpecialOffers from '../../components/home/SpecialOffers';
 import CategoryBanner from '../../components/home/CategoryBanner';
 import SectionHeader from '../../components/home/SectionHeader';
 import SummerSaleBanner from '../../components/home/SummerSaleBanner';
-import BottomNavigation from '../../components/home/BottomNavigation';
 
 // Data
 import { categories } from '../../data/categories';
@@ -50,7 +49,6 @@ const HomeScreen = () => {
                     <SectionHeader title="Sponsored" />
                 </ScrollView>
 
-                <BottomNavigation activeTab="home" />
             </View>
         </SafeAreaView>
     );

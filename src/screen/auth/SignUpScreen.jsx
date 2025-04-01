@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
 import InputField from '../../components/auth/InputField';
 import PasswordField from '../../components/auth/PasswordField';
 import AuthButton from '../../components/auth/AuthButton';
 import SocialButtonsRow from '../../components/auth/SocialButtonsRow';
+import TitleField from '../../components/auth/TitleField';
+import Layout from '../../components/auth/Layout';
+
+const { width } = Dimensions.get('window');
 
 const SignUpScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -18,7 +22,7 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     const handleLogin = () => {
-        navigation.navigate('SignIn');
+        navigation.navigate('SignInScreen');
     };
 
     const handleSocialSignUp = (provider) => {
@@ -27,81 +31,67 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.title}>Create an account</Text>
+        <Layout>
+            <TitleField title={"Create an account"} />
 
-                <InputField
-                    icon="user"
-                    placeholder="Username or Email"
-                    value={username}
-                    onChangeText={setUsername}
-                />
+            <InputField
+                type="user"
+                placeholder="Username or Email"
+                value={username}
+                onChangeText={setUsername}
+            />
 
-                <PasswordField
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                />
 
-                <PasswordField
-                    placeholder="Confirm Password"
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                />
+            <InputField
+                type="password"
+                placeholder="Password"
+                value={username}
+                onChangeText={setUsername}
+            />
 
-                <Text style={styles.termsText}>
-                    By clicking the Register button, you agree to the public offer
-                </Text>
 
-                <AuthButton title="Create Account" onPress={handleCreateAccount} />
+            <InputField
+                type="password"
+                placeholder="ConfirmPassword"
+                value={username}
+                onChangeText={setUsername}
+            />
 
-                <SocialButtonsRow onPressSocial={handleSocialSignUp} />
 
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>
-                        I Already Have an Account{' '}
-                        <Text style={styles.loginLink} onPress={handleLogin}>Login</Text>
-                    </Text>
-                </View>
-            </View>
-        </SafeAreaView>
+            <Text style={styles.termsText}>
+
+            </Text>
+            <Text style={styles.noteText}>
+                By clicking the <Text style={styles.asterisk}>Register</Text> button, you agree to the public offer
+            </Text>
+
+            <AuthButton title="Create Account" onPress={handleCreateAccount} />
+
+            <SocialButtonsRow navigation={navigation} goTo="SignInScreen" text1={"I Already Have an Account"} text2={"Login"} />
+
+
+        </Layout>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: COLORS.background,
-    },
-    content: {
-        flex: 1,
-        padding: SIZES.padding.lg,
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: SIZES.xxxLarge,
-        fontWeight: 'bold',
-        marginBottom: SIZES.margin.xl,
-        color: COLORS.text.primary,
-    },
     termsText: {
         fontSize: SIZES.small,
         color: COLORS.text.secondary,
-        marginBottom: SIZES.margin.md,
     },
-    footer: {
-        marginTop: SIZES.margin.xl,
-        alignItems: 'center',
-    },
-    footerText: {
-        fontSize: SIZES.medium,
+    noteText: {
+        fontSize: SIZES.small,
         color: COLORS.text.secondary,
+        marginBottom: SIZES.margin.lg,
+        width: width * 0.85,
+        paddingHorizontal: SIZES.paddingContaine.text,
+        marginBottom: 20
     },
-    loginLink: {
-        color: COLORS.primary,
-        fontWeight: '600',
+    asterisk: {
+        color: '#FF4B26',
+        fontSize: SIZES.small,
     },
+
 });
 
 export default SignUpScreen;

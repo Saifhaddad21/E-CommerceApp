@@ -27,14 +27,32 @@ export const promotions = [
   },
 ];
 
-export const mainBanner = {
-  id: 1,
-  title: '50-40% OFF',
-  subtitle: 'Now or (jamabadi)',
-  description: 'All colours',
-  backgroundColor: '#FF577F',
-  image: require('../assets/images/womanicon.png'),
-};
+export const mainBanner = [
+  {
+    id: 1,
+    title: '50-40% OFF',
+    subtitle: 'Now or (jamabadi)',
+    description: 'All colours',
+    backgroundColor: '#FF577F',
+    image: require('../assets/images/Rectangle48.png'),
+  },
+  {
+    id: 2,
+    title: '50-40% OFF',
+    subtitle: 'Now or (jamabadi)',
+    description: 'All colours',
+    backgroundColor: '#FF577F',
+    image: require('../assets/images/Rectangle48.png'),
+  },
+  {
+    id: 3,
+    title: '50-40% OFF',
+    subtitle: 'Now or (jamabadi)',
+    description: 'All colours',
+    backgroundColor: '#FF577F',
+    image: require('../assets/images/Rectangle48.png'),
+  },
+];
 
 export const categoryBanner = {
   id: 1,

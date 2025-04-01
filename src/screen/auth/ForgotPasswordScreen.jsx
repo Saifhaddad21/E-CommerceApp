@@ -1,10 +1,14 @@
 // screens/ForgotPasswordScreen.js
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
 import InputField from '../../components/auth/InputField';
 import AuthButton from '../../components/auth/AuthButton';
+import TitleField from '../../components/auth/TitleField';
+import Layout from '../../components/auth/Layout';
+
+const { width } = Dimensions.get('window');
 
 const ForgotPasswordScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -15,24 +19,22 @@ const ForgotPasswordScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.title}>Forgot password?</Text>
+        <Layout>
+            <TitleField title={"Forgot password?"} />
 
-                <InputField
-                    icon="envelope"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChangeText={setEmail}
-                />
+            <InputField
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChangeText={setEmail}
+            />
 
-                <Text style={styles.noteText}>
-                    * We will send you a message to set or reset your new password
-                </Text>
+            <Text style={styles.noteText}>
+                <Text style={styles.asterisk}>*</Text> We will send you a message to set or reset your new password
+            </Text>
 
-                <AuthButton title="Submit" onPress={handleSubmit} />
-            </View>
-        </SafeAreaView>
+            <AuthButton title="Submit" onPress={handleSubmit} />
+        </Layout>
     );
 };
 
@@ -43,8 +45,9 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        padding: SIZES.padding.lg,
-        justifyContent: 'center',
+        paddingVertical: SIZES.paddingContaine.ver,
+        paddingHorizontal: SIZES.paddingContaine.hor,
+        justifyContent: 'flex-start',
     },
     title: {
         fontSize: SIZES.xxxLarge,
@@ -56,6 +59,14 @@ const styles = StyleSheet.create({
         fontSize: SIZES.small,
         color: COLORS.text.secondary,
         marginBottom: SIZES.margin.lg,
+        width: width * 0.75,
+        paddingHorizontal: SIZES.paddingContaine.text,
+        marginTop: 20,
+        marginBottom: 20
+    },
+    asterisk: {
+        color: '#FF4B26',
+        fontSize: SIZES.small,
     },
 });
 

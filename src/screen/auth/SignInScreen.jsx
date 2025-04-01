@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLORS } from '../../styles/colors';
 import { SIZES } from '../../styles/sizes';
 import InputField from '../../components/auth/InputField';
-import PasswordField from '../../components/auth/PasswordField';
 import AuthButton from '../../components/auth/AuthButton';
 import SocialButtonsRow from '../../components/auth/SocialButtonsRow';
-import ForgotPasswordScreen from './ForgotPasswordScreen';
-import SignUpScreen from './SignUpScreen';
+import Layout from '../../components/auth/Layout';
+import TitleField from '../../components/auth/TitleField';
 
 const SignInScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
-        console.log('Login with:', { username, password });
-        // Handle login logic
+        navigation.navigate('TabApp');
     };
 
     const handleForgotPassword = () => {
-        navigation.navigate('ForgotPassword');
+        navigation.navigate('ForgotPasswordScreen');
     };
 
     const handleSignUp = () => {
@@ -32,78 +30,47 @@ const SignInScreen = ({ navigation }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.title}>Welcome Back!</Text>
+        <Layout>
+            <TitleField title={"Welcome Back!"} />
+            <InputField
+                type="email"
+                placeholder="Username or Email"
+                value={username}
+                onChangeText={setUsername}
+            />
+            <InputField
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+            />
 
-                <InputField
-                    icon="user"
-                    placeholder="Username or Email"
-                    value={username}
-                    onChangeText={setUsername}
-                />
+            <TouchableOpacity style={styles.forgotPasswordLink} onPress={handleForgotPassword}>
+                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+            </TouchableOpacity>
 
-                <PasswordField
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={setPassword}
-                />
+            <AuthButton title="Login" onPress={handleLogin} />
 
-                <TouchableOpacity style={styles.forgotPasswordLink} onPress={ForgotPasswordScreen}>
-                    <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-                </TouchableOpacity>
+            <SocialButtonsRow navigation={navigation} goTo="SignUpScreen" onPressSocial={handleSocialLogin} text1={"Create An Account"} text2={"Sign Up"} />
 
-                <AuthButton title="Login" onPress={SignInScreen} />
 
-                <SocialButtonsRow onPressSocial={handleSocialLogin} />
-
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>
-                        Create An Account{' '}
-                        <Text style={styles.signUpLink} onPress={SignUpScreen}>Sign Up</Text>
-                    </Text>
-                </View>
-            </View>
-        </SafeAreaView>
+        </Layout>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: COLORS.background,
-    },
-    content: {
-        flex: 1,
-        padding: SIZES.padding.lg,
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: SIZES.xxxLarge,
-        fontWeight: 'bold',
-        marginBottom: SIZES.margin.xl,
-        color: COLORS.text.primary,
-    },
     forgotPasswordLink: {
         alignSelf: 'flex-end',
-        marginBottom: SIZES.margin.md,
+        marginBottom: SIZES.margin.xxl,
+        marginTop: SIZES.margin.xl,
     },
     forgotPasswordText: {
-        color: COLORS.primary,
         fontSize: SIZES.small,
+        color: COLORS.button.primary,
+        paddingHorizontal: SIZES.paddingContaine.text,
     },
-    footer: {
-        marginTop: SIZES.margin.xl,
-        alignItems: 'center',
-    },
-    footerText: {
-        fontSize: SIZES.medium,
-        color: COLORS.text.secondary,
-    },
-    signUpLink: {
-        color: COLORS.primary,
-        fontWeight: '600',
-    },
+
 });
 
 export default SignInScreen;

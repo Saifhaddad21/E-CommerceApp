@@ -78,6 +78,9 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.ecommerceapp"
+    project.ext.vectoricons = [
+        iconFontNames: [ 'FontAwesome.ttf', 'FontAwesome5_Brands.ttf', 'FontAwesome5_Regular.ttf', 'FontAwesome5_Solid.ttf' ]
+    ]
     defaultConfig {
         applicationId "com.ecommerceapp"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -116,4 +119,7 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 }

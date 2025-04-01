@@ -11,32 +11,9 @@ import {
 } from 'react-native';
 import OnboardingItem from '../../components/Onboarding/OnboardingItem';
 import Paginator from '../../components/Onboarding/Paginator';
-import { navigation } from 'lucide-react-native';
+import { slides } from '../../data/OnboardingSlides';
 
-const { width } = Dimensions.get('window');
-
-const slides = [
-  {
-    id: '1',
-    title: 'Choose Products',
-    description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.',
-    image: require('../../assets/images/fashionshop1.png'),
-  },
-  {
-    id: '2',
-    title: 'Make Payment',
-    description: 'Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt.',
-    image: require('../../assets/images/Salesconsulting2.png'),
-  },
-  {
-    id: '3',
-    title: 'Get Your Order',
-    description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.',
-    image: require('../../assets/images/Shoppingbag3.png'),
-  },
-];
-
-const Onboarding = ({ navigation }) => {
+const OnboardingScreen = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -92,7 +69,7 @@ const Onboarding = ({ navigation }) => {
   );
 };
 
-export default Onboarding;
+export default OnboardingScreen;
 
 const styles = StyleSheet.create({
   container: {

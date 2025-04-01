@@ -1,5 +1,5 @@
 export const COLORS = {
-  primary: '#4169e1', // Royal blue for primary actions
+  primary: '#4169e1',
   secondary: '#FF577F', // Pink for promotional banners
   background: '#FFFFFF',
   text: {
@@ -7,6 +7,19 @@ export const COLORS = {
     secondary: '#666666',
     light: '#999999',
     white: '#FFFFFF',
+  },
+  input: {
+    primary: '#F3F3F3',
+    border: '#A8A8A9',
+    text: '#676767',
+    icon: '#626262',
+  },
+  button: {
+    primary: '#F83758',
+    bg: '#FCF3F6',
+  },
+  nav: {
+    primary: '#EB3030',
   },
   border: '#EEEEEE',
   white: '#FFFFFF',

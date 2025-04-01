@@ -8,7 +8,6 @@ const OnboardingItem = ({ item }) => {
     return (
         <View style={[styles.container, { width }]}>
             <StatusBar barStyle="dark-content" />
-            <Text style={styles.splashHeader}>Splash screen</Text>
             <View style={styles.imageContainer}>
                 <Image source={item.image} style={styles.image} resizeMode="contain" />
             </View>

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: SIZES.padding.md,
-        marginBottom: SIZES.margin.lg,
+        // marginBottom: SIZES.margin.lg,
     },
     backButton: {
         padding: SIZES.padding.xs,

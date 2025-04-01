@@ -4,10 +4,20 @@ const {width, height} = Dimensions.get('window');
 
 export const SIZES = {
   // Global sizes
+  margin: {
+    xl: 7,
+    lg: 6,
+    xxl: 20,
+  },
   base: 8,
   font: 14,
   radius: 8,
   padding: 10,
+  paddingContaine: {
+    ver: 30,
+    hor: 10,
+    text: 25,
+  },
 
   // Font sizes
   tiny: 10,

@@ -12,7 +12,6 @@ import Header from '../../components/trending/Header';
 import SearchBar from '../../components/trending/SearchBar';
 import ProductHeader from '../../components/trending/ProductHeader';
 import ProductGrid from '../../components/trending/ProductGrid';
-import BottomNavBar from '../../components/trending/BottomNavBar';
 
 // Data
 import { trendingProducts } from '../../data/trendingProducts';
@@ -61,10 +60,6 @@ const TrendingProductsScreen = ({ navigation }) => {
                     onProductPress={handleProductPress}
                 />
 
-                <BottomNavBar
-                    activeTab={activeTab}
-                    onTabPress={handleTabPress}
-                />
             </View>
         </SafeAreaView>
     );

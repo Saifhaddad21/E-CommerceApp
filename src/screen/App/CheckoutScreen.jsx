@@ -8,7 +8,6 @@ import Header from '../../components/checkout/Header';
 import OrderSummary from '../../components/checkout/OrderSummary';
 import PaymentList from '../../components/checkout/PaymentList';
 import Button from '../../components/checkout/Button';
-import BottomNavigation from '../../components/checkout/BottomNavigation';
 
 // Data
 import paymentMethodsData from '../../data/paymentMethods';
@@ -53,7 +52,6 @@ const CheckoutScreen = ({ navigation }) => {
                 <Button title="Continue" onPress={handleContinuePress} />
             </View>
 
-            <BottomNavigation activeTab="cart" onTabPress={handleTabPress} />
         </SafeAreaView>
     );
 };
